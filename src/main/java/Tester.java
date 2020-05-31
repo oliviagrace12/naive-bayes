@@ -28,13 +28,19 @@ public class Tester {
      */
     public double test() {
         int numCorrect = 0;
+        int counter = 0;
         for (int doc : docWords.keySet()) {
             HashMap<Integer, Integer> classTally = getClassTally(doc);
             int clazz = getClassForDoc(classTally);
 
+            if (counter < 20) {
+                System.out.println("Predicted class: " + clazz + ", Actual class: " + docClasses.get(doc));
+            }
+
             if (clazz == docClasses.get(doc)) {
                 numCorrect++;
             }
+            counter++;
         }
 
         return numCorrect;
