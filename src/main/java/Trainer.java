@@ -3,8 +3,10 @@ package main.java;
 import javafx.beans.binding.IntegerBinding;
 
 import java.nio.IntBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by oliviachisman on 5/30/20
@@ -28,6 +30,12 @@ public class Trainer {
 
         for (Integer clazz : classes) {
             probabilities.put(clazz, createProbabilityMap(clazz));
+        }
+
+        String[] sampleWords = {"program", "includ", "match", "game", "plai", "window", "file", "subject", "write"};
+        for (String word : sampleWords) {
+            System.out.println("p(\"" + word + "\" | \"Hockey\") = " + probabilities.get(1).get(word));
+            System.out.println("p(\"" + word + "\" | \"Microsoft Windows\") = " + probabilities.get(0).get(word));
         }
 
         return probabilities;
