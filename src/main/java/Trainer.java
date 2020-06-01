@@ -1,12 +1,7 @@
 package main.java;
 
-import javafx.beans.binding.IntegerBinding;
-
-import java.nio.IntBuffer;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by oliviachisman on 5/30/20
@@ -70,7 +65,7 @@ public class Trainer {
     private double getProbabilityOfWordGivenClass(String word, int clazz, double totalWordsInDocsInClass, double vocabulary) {
         double numWordInClass = getNumWordInClass(word, clazz);
 
-        return (numWordInClass + 1) / (totalWordsInDocsInClass + vocabulary) ;
+        return (numWordInClass + 1) / (totalWordsInDocsInClass + vocabulary);
     }
 
     private double getNumWordInClass(String word, int clazz) {
