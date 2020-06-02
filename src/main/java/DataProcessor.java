@@ -70,6 +70,9 @@ public class DataProcessor {
         return classes;
     }
 
+    /**
+     * Returns a map of document number to list of words appearing in that document.
+     */
     private HashMap<Integer, List<String>> generateDocWords() {
         HashMap<Integer, List<String>> docToWordsMap = new HashMap<>();
         for (String word : wordOccurrences.keySet()) {
@@ -83,6 +86,10 @@ public class DataProcessor {
         return docToWordsMap;
     }
 
+    /**
+     * Returns a map of each word to a map of all documents containing that word to the number of times the word
+     * appears in the document.
+     */
     private HashMap<String, HashMap<Integer, Double>> generateWordOccurrences(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         HashMap<String, HashMap<Integer, Double>> testWordOccurrences = new HashMap<>();
@@ -103,6 +110,9 @@ public class DataProcessor {
         return testWordOccurrences;
     }
 
+    /**
+     * Returns a map of documents to their class
+     */
     private HashMap<Integer, Integer> getClassesOfDocs(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         HashMap<Integer, Integer> classes = new HashMap<>();
@@ -115,6 +125,9 @@ public class DataProcessor {
         return classes;
     }
 
+    /**
+     * Returns a list of all unique words (the vocabulary)
+     */
     private ArrayList<String> getWords(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         ArrayList<String> words = new ArrayList<>();

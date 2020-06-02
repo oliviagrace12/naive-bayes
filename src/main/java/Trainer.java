@@ -23,10 +23,13 @@ public class Trainer {
         // that if a word is present, that doc is in the class
         HashMap<Integer, HashMap<String, Double>> probabilities = new HashMap<>();
 
+        // For each class, calculating probability that each word appears in a document, given the document
+        // is of that class.
         for (Integer clazz : classes) {
             probabilities.put(clazz, createProbabilityMap(clazz));
         }
 
+        // Printing out some sample probabilities
         String[] sampleWords = {"program", "includ", "match", "game", "plai", "window", "file", "subject", "write"};
         for (String word : sampleWords) {
             System.out.println("p(\"" + word + "\" | \"Hockey\") = " + probabilities.get(1).get(word));
@@ -37,7 +40,9 @@ public class Trainer {
     }
 
     private HashMap<String, Double> createProbabilityMap(int clazz) {
+        // Map of words to the probability that they appear given the document is of class "clazz"
         HashMap<String, Double> probabilities = new HashMap<>();
+        // Counting total number of words in all the documents in class "clazz"
         double totalWordsInDocsInClass = getTotalWordsInDocsInClass(clazz);
 
         for (String word : wordOccurrences.keySet()) {
@@ -48,6 +53,9 @@ public class Trainer {
         return probabilities;
     }
 
+    /**
+     * Returns total number of words in all the documents in class "clazz"
+     */
     private double getTotalWordsInDocsInClass(int clazz) {
         int num = 0;
         for (String w : wordOccurrences.keySet()) {
@@ -63,11 +71,18 @@ public class Trainer {
     }
 
     private double getProbabilityOfWordGivenClass(String word, int clazz, double totalWordsInDocsInClass, double vocabulary) {
+        // Number of occurrences of word "word" in class "clazz"
         double numWordInClass = getNumWordInClass(word, clazz);
 
-        return (numWordInClass + 1) / (totalWordsInDocsInClass + vocabulary);
+        // Calculating P(wi | ci) = (nij + 1) / (ni + |V|), where wi is "word", ci is "clazz", nij is
+        // the number of occurrences of word "word" in class "clazz", ni is the total number of words
+        // in all the docs in "clazz", and V is the number of unique words in all documents combined.
+        return (numWordInClass + 1) / (totalWordsInDocsInClass + Math.abs(vocabulary));
     }
 
+    /**
+     * Returns the number of occurrences of word "word" in class "clazz"
+     */
     private double getNumWordInClass(String word, int clazz) {
         int num = 0;
         HashMap<Integer, Double> docsContainingWord = wordOccurrences.get(word);
